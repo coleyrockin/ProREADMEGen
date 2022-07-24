@@ -67,12 +67,46 @@ const questions = [{
         }
     }
 },
-
+//Contributer section
 {
     type: 'confirm',
-    name: 'confirmContrinution',
+    name: 'confirmContribution',
     message: 'May other developers contribute to your repository?'
 },
+{
+    type: 'input',
+    name: 'contribution',
+    message: 'Please explain how other developers may contribute to your project.',
+    when: ({ confirmContribution }) => {
+        if (confirmContribution) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+},
+//Testing section
+{
+    type: 'confirm',
+    name: 'testConfirm',
+    message: 'Is Testing available?',
+},
+{
+    type: 'input',
+    name: 'testing',
+    message: 'Please explain how users may test your application.',
+    when: ({ testConfirm }) => {
+        if (testConfirm) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+},
+//Licensing check box option
+{
+
+}
 
 
 ];
