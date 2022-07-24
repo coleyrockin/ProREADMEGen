@@ -105,8 +105,36 @@ const questions = [{
 },
 //Licensing check box option
 {
-
-}
+    type: 'checkbox',
+    name: 'license',
+    message: 'Please choose a license.',
+    choices: ['MIT License', 'GNU AGPLv3', 'GNU GPLv3',
+    'GNU LGPLv3', 'Mozilla Public License 2.0',
+    'Apache License 2.0', 'Boost Software License 1.0',
+    'The Unlicense'],
+    validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log('Please select a license.');
+          return false;
+        }
+    }
+},
+//GITHUB Username Input
+{
+    type: 'input',
+    name: 'username',
+    message: 'What is your GitHub username? (Required)',
+    validate: nameInput => {
+        if (nameInput) {
+        return true;
+        } else {
+        console.log('Please enter your GitHub username.');
+        return false;
+        }
+    }
+},
 
 
 ];
