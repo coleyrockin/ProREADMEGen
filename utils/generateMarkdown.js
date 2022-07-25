@@ -5,7 +5,7 @@ function generateMarkdown(data) {
   ## Table of Contents 
   - [Description](#description)
   - [Installation](#installation)
-  - [Instructions](#instructions)
+  - [Usage](#usage)
   - [Contribution](#contribution)
   - [Testing](#testing)
   - [Additional Info](#additional-info)
@@ -13,8 +13,8 @@ function generateMarkdown(data) {
   ${data.description}
   ## Installation:
   ${data.installation}
-  ## Instructions:
-  ${data.instructions}
+  ## Usage:
+  ${data.usage}
   ## License:
   ${data.license}
   ## Contribution:

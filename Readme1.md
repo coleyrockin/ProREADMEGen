@@ -1,25 +1,25 @@
-# ProREADmeGEN
+# BOOOYYYYYYDDDDD
   ## Licensing:
-  [![license](https://img.shields.io/badge/MITLicense-blue)](https://shields.io)
+  [![license](https://img.shields.io/badge/MIT-License-blue)](https://shields.io)
   ## Table of Contents 
   - [Description](#description)
   - [Installation](#installation)
-  - [Instructions](#instructions)
+  - [Usage](#usage)
   - [Contribution](#contribution)
   - [Testing](#testing)
   - [Additional Info](#additional-info)
   ## Description:
-  This generates a README.md using NODE.js, and inquirer.
+  amazing
   ## Installation:
-  Must download the code and have on use on vs.code in command line prompts
-  ## Instructions:
-  Use command in terminal "node index" then answer questions.
+  Must install
+  ## Usage:
+  dont be dumb
   ## License:
-  MIT License
+  MIT-License
   ## Contribution:
-  undefined
+  contriubet
   ## Testing:
-  undefined
+  no testing avaible 
   ## Additional Info:
   - Github: [coleyrockin](https://github.com/coleyrockin)
   - Email: coleyrockin@aol.com 

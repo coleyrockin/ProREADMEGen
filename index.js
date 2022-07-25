@@ -54,11 +54,11 @@ const questions = [{
 { //confirm
     type: 'confirm',
     name: 'confirmUsage',
-    message: 'Would you like to give instructions for using your application?',
+    message: 'Explain usage for using your application?',
 },
 {//if yes
     type: 'input',
-    name: 'instructions',
+    name: 'usage',
     message: 'Please list instructions for using application.',
     when: ({ confirmUsage }) => {
         if (confirmUsage) {
@@ -109,8 +109,8 @@ const questions = [{
     type: 'checkbox',
     name: 'license',
     message: 'Please choose a license.',
-    choices: ['MITLicense', 'GNU AGPL V.3.0', 'Mozilla Public License',
-    'Apache License', 'The Unlicense', 'NONE'],
+    choices: ['MIT-License', 'GNU-AGPLV.3.0', 'Mozilla-Public-License',
+    'Apache-License', 'The-Unlicense', 'NONE'],
     validate: nameInput => {
         if (nameInput) {
           return true;
@@ -148,18 +148,8 @@ const questions = [{
         }
     }
 },
-{
-    type: 'input',
-    name: 'questions',
-    message: 'Please list instructions for those who wish to contact you.',
-    validate: (nameInput) => {
-        if (nameInput) {
-        return true;
-        } else {
-        return false;
-        }
-    }
-}]; //end of questions array
+
+]; //end of questions array
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
