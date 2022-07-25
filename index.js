@@ -109,7 +109,7 @@ const questions = [{
     type: 'checkbox',
     name: 'license',
     message: 'Please choose a license.',
-    choices: ['MIT License', 'GNU AGPL V.3.0', 'Mozilla Public License',
+    choices: ['MITLicense', 'GNU AGPL V.3.0', 'Mozilla Public License',
     'Apache License', 'The Unlicense', 'NONE'],
     validate: nameInput => {
         if (nameInput) {

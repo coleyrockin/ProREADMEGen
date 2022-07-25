@@ -1,6 +1,6 @@
-# dsfdf
+# ProREADmeGEN
   ## Licensing:
-  [![license](https://img.shields.io/badge/license--blue)](https://shields.io)
+  [![license](https://img.shields.io/badge/MITLicense-blue)](https://shields.io)
   ## Table of Contents 
   - [Description](#description)
   - [Installation](#installation)
@@ -9,17 +9,17 @@
   - [Testing](#testing)
   - [Additional Info](#additional-info)
   ## Description:
-  dsfdsf
+  This generates a README.md using NODE.js, and inquirer.
   ## Installation:
-  undefined
+  Must download the code and have on use on vs.code in command line prompts
   ## Instructions:
-  undefined
+  Use command in terminal "node index" then answer questions.
   ## License:
-  
+  MIT License
   ## Contribution:
   undefined
   ## Testing:
   undefined
   ## Additional Info:
-  - Github: [dsf](https://github.com/dsf)
-  - Email: dsf 
+  - Github: [coleyrockin](https://github.com/coleyrockin)
+  - Email: coleyrockin@aol.com 
