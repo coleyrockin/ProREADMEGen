@@ -35,12 +35,13 @@ const questions = [{
 {
     type: 'confirm',
     name: 'confirmInstall',
-    message: 'Is there an installation process?'
+    message: 'Is there an installation process?',
+  
 },
 {
     type: 'input',
-    name: 'Installation',
-    message: 'Please list installion instructions.',
+    name: 'installation',
+    message: 'Please list installation instructions.',
     // If person says yes to install install process, prompt this list install instr below
     when: ({ confirmInstall }) => {
         if (confirmInstall) {
