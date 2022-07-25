@@ -149,9 +149,19 @@ const questions = [{
         }
     }
 },
+{
+    type: 'input',
+    name: 'questions',
+    message: 'Please list instructions for those who wish to contact you.',
+    validate: (nameInput) => {
+        if (nameInput) {
+        return true;
+        } else {
+        return false;
+        }
+    }
+}]; //end of questions array
 
-
-];
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
 
