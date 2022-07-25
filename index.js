@@ -164,7 +164,7 @@ const questions = [{
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeToFile(fileName, data, error => {
+    fs.writeFile(fileName, data, error => {
         if (error) {
             return console.log('There was an error : ' + error);
         }
@@ -172,7 +172,17 @@ function writeToFile(fileName, data) {
 };
 const createReadMe = util.promisify(writeToFile);
 // TODO: Create a function to initialize app
-function init() {}
+async function init() {
+    try {
+        const userAnswers = await inquirer.prompt(questions);
+        console.log('Thank you!!! The current data is processing into a README.MD: ', userAnswers);
+        const markdown = generateMarkdown(userAnswers);
+        console.log(markdown);
+        await createReadMe('Readme1.md', markdown);
+    } catch (error) {
+        console.log('Sorry there was an error.' + error);
+    }
+};
 
 // Function call to initialize app
 init();
