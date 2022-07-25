@@ -163,8 +163,14 @@ const questions = [{
 }]; //end of questions array
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
+function writeToFile(fileName, data) {
+    fs.writeToFile(fileName, data, error => {
+        if (error) {
+            return console.log('There was an error : ' + error);
+        }
+    })
+};
+const createReadMe = util.promisify(writeToFile);
 // TODO: Create a function to initialize app
 function init() {}
 
