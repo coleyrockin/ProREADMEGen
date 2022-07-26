@@ -54,12 +54,12 @@ const questions = [{
 { //confirm
     type: 'confirm',
     name: 'confirmUsage',
-    message: 'Explain usage for using your application?',
+    message: 'Explain usage Yes(y) or No(n)?',
 },
 {//if yes
     type: 'input',
     name: 'usage',
-    message: 'Please list instructions for using application.',
+    message: 'Please list instructions/Usage for using application.',
     when: ({ confirmUsage }) => {
         if (confirmUsage) {
             return true;
@@ -72,7 +72,7 @@ const questions = [{
 {
     type: 'confirm',
     name: 'confirmContribution',
-    message: 'May other developers contribute to your repository?'
+    message: 'How can others contribute, and guidelines to your repository?'
 },
 {
     type: 'input',
@@ -108,9 +108,9 @@ const questions = [{
 {
     type: 'checkbox',
     name: 'license',
-    message: 'Please choose a license.',
-    choices: ['MIT-License', 'GNU-AGPLV.3.0', 'Mozilla-Public-License',
-    'Apache-License', 'The-Unlicense', 'NONE'],
+    message: 'Please choose a license (**Make sure to press "space"**).',
+    choices: ['MIT', 'Mozilla_Public',
+    'Apache', 'The_Unlicense', 'No_License'],
     validate: nameInput => {
         if (nameInput) {
           return true;
