@@ -1,4 +1,4 @@
-# EXAMPLEREADME
+# Professional README.MD generator
   ## Licensing:
     N/A
   ## Table of Contents 
@@ -7,11 +7,11 @@
   - [Usage](#usage)
   - [Additional Info](#additional-info-or-questions)
   ## Description:
-  This is an example of my readme generator
+  Generate a professional README.MD using inquirer.
   ## Installation:
-  Must have Node.js, and inquerier Installed.
+  Install inquirer through the terminal.
   ## Usage:
-  Use the command "Node index" in the terminal, and follow the prompts.
+  After installing inquirer (npm i inquirer@8.2.4) you will use the command "node index" in the terminal to invoke the inquirer prompts. Answer accordingly and will generate a file "Readme1.md".
 
   ## Additional Info or Questions:
   https://drive.google.com/file/d/1GkhBB3EHF_eVfrLReHRNx_O-8_8CRvHl/view
