@@ -1,6 +1,6 @@
-# Heryeffre
+# Team Profile Generator
   ## Licensing:
-  [![license](https://img.shields.io/badge/License-The_Unlicense-blue)](https://shields.io)
+  [![license](https://img.shields.io/badge/License-No_License-blue)](https://shields.io)
   ## Table of Contents 
   - [Description](#description)
   - [Installation](#installation)
@@ -9,17 +9,17 @@
   - [Testing](#testing)
   - [Additional Info](#additional-info-or-questions)
   ## Description:
-  fdgfdgf
+  Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage
   ## Installation:
-  dfdggf
+  Node.js, Inquirer
   ## Usage:
-  dsfdsfsgsgs
+  After installing Node.js, Inquirer use the command "Node index" in the terminal.
   ## License:
-  The_Unlicense
+  No_License
   ## Contribution:
-  gfdgfdgffdgfgf
+  undefined
   ## Testing:
-  fgfdgfdgfgfdgfdgfg
+  Use command "Npm test" to run test on project
   ## Additional Info or Questions:
-  - Github: [coelyrockin](https://github.com/coelyrockin)
+  - Github: [coleyrockin](https://github.com/coleyrockin)
   - Email: coleyrockin@aol.com 

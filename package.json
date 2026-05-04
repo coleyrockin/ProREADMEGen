@@ -1,17 +1,16 @@
 {
-  "name": "static-site",
-  "version": "1.0.0",
-  "description": "Quickly generate a README file by using a command-line application \"inquirer\".",
+  "name": "pro-readme-gen",
+  "version": "0.5.0",
+  "description": "A dependency-light CLI for generating cleaner project README files.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "inquirer": "^8.2.4"
+  "engines": {
+    "node": ">=20"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/coleyrockin/ProREADMEGen.git"

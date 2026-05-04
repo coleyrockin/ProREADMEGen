@@ -1,177 +1,130 @@
-// TODO: Include packages needed for this application
-const fs = require('fs');
-const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown');
-const util = require('util');
+const path = require('node:path');
+const { parseArgs } = require('node:util');
+const { stdin: input, stdout: output } = require('node:process');
+const readline = require('node:readline/promises');
 
-// TODO: Create an array of questions for user input
-const questions = [{
-    type: 'input',
-    name: 'title',
-    message: 'What is the title of your reposiory?(REQUIRED!)',
-    validate: nameInput => {
-        if (nameInput) {
-            return true;
-        } else {
-            console.log('Please enter your repo title.');
-            return false;
-        }
-    }
-},
-//DESCRIPTION
-{
-    type: 'input',
-    name: 'description',
-    message: 'What is the description of your repository?(REQUIRED!)',
-    validate: nameInput => {
-        if (nameInput) {
-            return true;
-        } else {
-            console.log('Please eneter a description of the repository.');
-        }
-    }
-},
-//INSTALL QUESTION
-{
-    type: 'confirm',
-    name: 'confirmInstall',
-    message: 'Is there an installation process?',
-  
-},
-{
-    type: 'input',
-    name: 'installation',
-    message: 'Please list installation instructions.',
-    // If person says yes to install install process, prompt this list install instr below
-    when: ({ confirmInstall }) => {
-        if (confirmInstall) {
-            return true;
-        } else {
-            return false
-        }
-    }
-},
-{ //confirm
-    type: 'confirm',
-    name: 'confirmUsage',
-    message: 'Explain usage Yes(y) or No(n)?',
-},
-{//if yes
-    type: 'input',
-    name: 'usage',
-    message: 'Please list instructions/Usage for using application.',
-    when: ({ confirmUsage }) => {
-        if (confirmUsage) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-},
-//Contributer section
-{
-    type: 'confirm',
-    name: 'confirmContribution',
-    message: 'How can others contribute, and guidelines to your repository?'
-},
-{
-    type: 'input',
-    name: 'contribution',
-    message: 'Please explain how other developers may contribute to your project.',
-    when: ({ confirmContribution }) => {
-        if (confirmContribution) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-},
-//Testing section
-{
-    type: 'confirm',
-    name: 'testConfirm',
-    message: 'Is Testing available?',
-},
-{
-    type: 'input',
-    name: 'testing',
-    message: 'Please explain how users may test your application.',
-    when: ({ testConfirm }) => {
-        if (testConfirm) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-},
-//Licensing check box option
-{
-    type: 'checkbox',
-    name: 'license',
-    message: 'Please choose a license (**Make sure to press "space"**).',
-    choices: ['MIT', 'Mozilla_Public',
-    'Apache', 'The_Unlicense', 'No_License'],
-    validate: nameInput => {
-        if (nameInput) {
-          return true;
-        } else {
-          console.log('Please select a license.');
-          return false;
-        }
-    }
-},
-//GITHUB Username Input
-{
-    type: 'input',
-    name: 'username',
-    message: 'What is your GitHub username? (Required)',
-    validate: nameInput => {
-        if (nameInput) {
-        return true;
-        } else {
-        console.log('Please enter your GitHub username.');
-        return false;
-        }
-    }
-},
-//Email input
-{
-    type: 'input',
-    name: 'email',
-    message: 'What is your email address? (Required)',
-    validate: nameInput => {
-        if (nameInput) {
-        return true;
-        } else {
-        console.log('Please enter your email.');
-        return false;
-        }
-    }
-},
+const { generateMarkdown, LICENSE_OPTIONS } = require('./utils/generateMarkdown');
+const {
+  DEFAULT_OUTPUT,
+  resolveOutputPath,
+  writeFileSafely,
+} = require('./utils/outputFile');
 
-]; //end of questions array
+function printHelp() {
+  console.log(`ProREADMEGen v0.5
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, error => {
-        if (error) {
-            return console.log('There was an error : ' + error);
-        }
-    })
+Usage:
+  node index.js [--output README.generated.md] [--force]
+
+Options:
+  --output <file>  Write to a file inside the current directory.
+  --force          Overwrite the output file if it already exists.
+  --help           Show this message.
+`);
+}
+
+function normalizeRequired(value, fieldName) {
+  const normalized = value.trim();
+  if (!normalized) {
+    throw new Error(`${fieldName} is required.`);
+  }
+
+  return normalized;
+}
+
+function normalizeLicense(value) {
+  const normalized = value.trim();
+  if (!normalized) {
+    return 'No License';
+  }
+
+  const selected = LICENSE_OPTIONS.find(
+    option => option.toLowerCase() === normalized.toLowerCase()
+  );
+
+  if (!selected) {
+    throw new Error(`License must be one of: ${LICENSE_OPTIONS.join(', ')}`);
+  }
+
+  return selected;
+}
+
+async function promptForAnswers() {
+  const rl = readline.createInterface({ input, output });
+
+  try {
+    const title = normalizeRequired(
+      await rl.question('Project title: '),
+      'Project title'
+    );
+    const description = normalizeRequired(
+      await rl.question('Description: '),
+      'Description'
+    );
+    const installation = (await rl.question('Installation instructions (optional): ')).trim();
+    const usage = (await rl.question('Usage instructions (optional): ')).trim();
+    const contribution = (await rl.question('Contribution guidelines (optional): ')).trim();
+    const testing = (await rl.question('Testing instructions (optional): ')).trim();
+    const license = normalizeLicense(
+      await rl.question(
+        `License [${LICENSE_OPTIONS.join(', ')}] (default: No License): `
+      )
+    );
+    const username = (await rl.question('GitHub username (optional): ')).trim();
+    const email = (await rl.question('Email address (optional): ')).trim();
+
+    return {
+      title,
+      description,
+      installation,
+      usage,
+      contribution,
+      testing,
+      license,
+      username,
+      email,
+    };
+  } finally {
+    rl.close();
+  }
+}
+
+async function run(argv = process.argv.slice(2)) {
+  const { values } = parseArgs({
+    args: argv,
+    options: {
+      output: { type: 'string' },
+      force: { type: 'boolean', default: false },
+      help: { type: 'boolean', default: false },
+    },
+    allowPositionals: false,
+  });
+
+  if (values.help) {
+    printHelp();
+    return;
+  }
+
+  const answers = await promptForAnswers();
+  const markdown = generateMarkdown(answers);
+  const filePath = resolveOutputPath(values.output, process.cwd());
+
+  await writeFileSafely(filePath, markdown, { force: values.force });
+
+  console.log(`README written to ${path.relative(process.cwd(), filePath)}`);
+}
+
+if (require.main === module) {
+  run().catch(error => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = {
+  run,
+  promptForAnswers,
+  normalizeLicense,
+  normalizeRequired,
+  DEFAULT_OUTPUT,
 };
-const createReadMe = util.promisify(writeToFile);
-// TODO: Create a function to initialize app
-async function init() {
-    try {
-        const userAnswers = await inquirer.prompt(questions);
-        console.log('Thank you!!! The current data is processing into a README.MD: ', userAnswers);
-        const markdown = generateMarkdown(userAnswers);
-        console.log(markdown);
-        await createReadMe('Readme1.md', markdown);
-    } catch (error) {
-        console.log('Sorry there was an error.' + error);
-    }
-};
-
-// Function call to initialize app
-init();
